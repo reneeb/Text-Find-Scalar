@@ -25,7 +25,7 @@ sub find{
     $text =~ s,<<'(.*?)'.*?\n\1,,sg;
     $text =~ s,'.*?',,sg;
     $text =~ s,q~.*?~,,sg;
-    @array = $text =~ m/(?:(\$\w+(?:->)?(?:\[\$?\w+\]|{\$?\w+}))|(\${\w+})|(\$\w+))/sg;
+    @array = $text =~ m/(?:(\$\w+(?:->)?(?:\[\$?\w+\]|\{\$?\w+\}))|(\$\{\w+\})|(\$\w+))/sg;
     @array = grep{defined}@array;
   }
   $self->_Elements(@array);
