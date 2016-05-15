@@ -8,6 +8,7 @@
 use Test::More tests => 6;
 
 use Text::Find::Scalar;
+diag $];
 ok(1); # If we made it this far, we're ok.
 
 my $finder = Text::Find::Scalar->new();
