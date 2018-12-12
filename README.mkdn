@@ -4,7 +4,7 @@
 
 # NAME
 
-Text::Find::Scalar
+Text::Find::Scalar - Find scalar names in a text.
 
 # VERSION
 
@@ -26,9 +26,9 @@ version 0.07
 
 # DESCRIPTION
 
-This Class helps to find all Scalar variables in a text. It is recommended to
+This class helps to find all scalar variables in a text. It is recommended to
 use [PPI](https://metacpan.org/pod/PPI) to parse Perl programs. This module should help to find SCALAR names
-e.g. in Error messages.
+e.g. in error messages.
 
 Scalars that should be found:
 
@@ -51,10 +51,6 @@ Scalars that are not covered
         '$foo'
 
 -
-
-# NAME
-
-Text::Find::Scalar - Find scalar names in a text.
 
 # EXAMPLE
 
@@ -90,7 +86,7 @@ prints
 
     my $finder = Text::Find::Scalar->new();
 
-creates a new Text::Find::Scalar object.
+creates a new `Text::Find::Scalar` object.
 
 ## find
 
@@ -126,14 +122,6 @@ returns an arrayref with a list of all scalars, but each match appears just once
     my $counter = $finder->count('$foo');
 
 returns the number of appearances of one scalar.
-
-## "private" methods
-
-### \_Elements
-
-returns an arrayref of all scalars found in the text
-
-### \_Counter
 
 
 
@@ -180,18 +168,6 @@ add the `--author` and `--release` options:
 ```
 $ dzil test --author --release
 ```
-
-# AUTHOR
-
-Renee Baecker, <module@renee-baecker.de>
-
-# COPYRIGHT AND LICENSE
-
-Copyright (C) 2006 by Renee Baecker
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.8.6 or,
-at your option, any later version of Perl 5 you may have available.
 
 # AUTHOR
 
