@@ -8,7 +8,7 @@ Text::Find::Scalar - Find scalar names in a text.
 
 # VERSION
 
-version 0.08
+version 0.09
 
 # SYNOPSIS
 
