@@ -1,34 +1,45 @@
-# Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl Text-Find-Scalar.t'
+#!/usr/bin/env perl
 
-#########################
+use strict;
+use warnings;
 
-# change 'tests => 1' to 'tests => last_test_to_print';
-
-use Test::More tests => 6;
+use Test::More;
 
 use Text::Find::Scalar;
+
 diag $];
 ok(1); # If we made it this far, we're ok.
 
 my $finder = Text::Find::Scalar->new();
-ok(defined ref($finder) && ref($finder) eq 'Text::Find::Scalar');
+isa_ok( $finder, 'Text::Find::Scalar' );
 
 local $/;
 my $string = <DATA>;
 my $test = $finder->find($string);
-ok($test->[0] eq '$foo');
-ok($test->[5] eq '$foo->[5]');
-ok($test->[9] eq '$variable');
 
-my $check = 13;
+is $test->[0], '$foo';
+is $test->[5], '$foo->[5]';
+is $test->[9], '$variable';
+
 my $sum   = 0;
 while($finder->hasNext()){
   $finder->nextElement();
   ++$sum;
 }
-ok($sum == $check);
 
+is $sum, 13;
+
+my $found = $finder->find();
+is $found, undef;
+
+is $finder->find([]), undef;
+
+my @test = $finder->find( $string );
+is $test[0], '$foo';
+is $test[5], '$foo->[5]';
+is $test[9], '$variable';
+
+done_testing();
 
 __DATA__
 $foo
