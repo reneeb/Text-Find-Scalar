@@ -21,13 +21,15 @@ sub find{
   my ($self,$text) = @_;
   my @array = ();
   $self->_Counter(0);
-  if(defined $text){
-    $text =~ s,<<'(.*?)'.*?\n\1,,sg;
-    $text =~ s,'.*?',,sg;
-    $text =~ s,q~.*?~,,sg;
-    @array = $text =~ m/(?:(\$\w+(?:->)?(?:\[\$?\w+\]|\{\$?\w+\}))|(\$\{\w+\})|(\$\w+))/sg;
-    @array = grep{defined}@array;
-  }
+
+  return if !defined $text;
+
+  $text =~ s,<<'(.*?)'.*?\n\1,,sg;
+  $text =~ s,'.*?',,sg;
+  $text =~ s,q~.*?~,,sg;
+  @array = $text =~ m/(?:(\$\w+(?:->)?(?:\[\$?\w+\]|\{\$?\w+\}))|(\$\{\w+\})|(\$\w+))/sg;
+  @array = grep{defined}@array;
+
   $self->_Elements(@array);
   return wantarray ? @{$self->_Elements()} : $self->_Elements();
 }# find

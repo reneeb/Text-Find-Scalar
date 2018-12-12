@@ -1,0 +1,205 @@
+[![Build Status](https://travis-ci.org/reneeb/Text-Find-Scalar.svg?branch=master)](https://travis-ci.org/reneeb/Text-Find-Scalar)
+[![Kwalitee status](http://cpants.cpanauthors.org/dist/Text-Find-Scalar.png)](http://cpants.charsbar.org/dist/overview/Text-Find-Scalar)
+[![GitHub issues](https://img.shields.io/github/issues/reneeb/Text-Find-Scalar.svg)](https://github.com/reneeb/Text-Find-Scalar/issues)
+
+# NAME
+
+Text::Find::Scalar
+
+# VERSION
+
+version 0.06
+
+# SYNOPSIS
+
+    use Text::Find::Variable;
+    
+    my $finder = Text::Find::Variable->new();
+    my $arrayref = $finder->find($string);
+    
+    # or
+    
+    $finder->find($string);
+    while($finder->hasNext()){
+      print $finder->nextElement();
+    }
+
+# DESCRIPTION
+
+This Class helps to find all Scalar variables in a text. It is recommended to
+use [PPI](https://metacpan.org/pod/PPI) to parse Perl programs. This module should help to find SCALAR names
+e.g. in Error messages.
+
+Scalars that should be found:
+
+- double quoted
+
+        "$foo"
+
+- references
+
+        $foo->{bar}
+
+- elements of arrays
+
+        $array[0]
+
+Scalars that are not covered
+
+- single quoted
+
+        '$foo'
+
+-
+
+# NAME
+
+Text::Find::Scalar - Find scalar names in a text.
+
+# EXAMPLE
+
+    #!/usr/bin/perl
+    
+    use strict;
+    use warnings;
+    
+    use Text::Find::Scalar;
+    
+    my $string = q~This is a $variable
+           another $variable and another "$eine", but '$no' is not found.
+           A $reference->{$key} is found. An array element $array[0]
+           is also found~;
+    
+    my $finder = Text::Find::Scalar->new();
+    my @scalars = $finder->find($string);
+    
+    print $_,"\n" for(@scalars);
+
+prints
+
+    /homes/reneeb/community>find_scalar.pl
+    $variable
+    $variable
+    $eine
+    $reference->{$key}
+    $array[0]
+
+# METHODS
+
+## new
+
+    my $finder = Text::Find::Scalar->new();
+
+creates a new Text::Find::Scalar object.
+
+## find
+
+    my $string = q~Test $test $foo '$bar'~;
+    my $arrayref = $finder->find($string);
+    my @found    = $finder->find($string);
+
+parses the text and returns an arrayref that contains all matches.
+
+## hasNext
+
+    while($finder->hasNext()){
+      print $finder->nextElement();
+    }
+
+returns 1 unless the user walked through all matches.
+
+## nextElement
+
+    print $finder->nextElement();
+    print $finder->nextElement();
+
+returns the next element in list.
+
+## unique
+
+    my $uniquenames = $finder->unique();
+
+returns an arrayref with a list of all scalars, but each match appears just once.
+
+## count
+
+    my $counter = $finder->count('$foo');
+
+returns the number of appearances of one scalar.
+
+## "private" methods
+
+### \_Elements
+
+returns an arrayref of all scalars found in the text
+
+### \_Counter
+
+
+
+# Development
+
+The distribution is contained in a Git repository, so simply clone the
+repository
+
+```
+$ git clone git://github.com/reneeb/Text-Find-Scalar.git
+```
+
+and change into the newly-created directory.
+
+```
+$ cd Text-Find-Scalar
+```
+
+The project uses [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla) to
+build the distribution, hence this will need to be installed before
+continuing:
+
+```
+$ cpanm Dist::Zilla
+```
+
+To install the required prequisite packages, run the following set of
+commands:
+
+```
+$ dzil authordeps --missing | cpanm
+$ dzil listdeps --author --missing | cpanm
+```
+
+The distribution can be tested like so:
+
+```
+$ dzil test
+```
+
+To run the full set of tests (including author and release-process tests),
+add the `--author` and `--release` options:
+
+```
+$ dzil test --author --release
+```
+
+# AUTHOR
+
+Renee Baecker, <module@renee-baecker.de>
+
+# COPYRIGHT AND LICENSE
+
+Copyright (C) 2006 by Renee Baecker
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.6 or,
+at your option, any later version of Perl 5 you may have available.
+
+# AUTHOR
+
+Renee Baecker <reneeb@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2016 by Renee Baecker.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
