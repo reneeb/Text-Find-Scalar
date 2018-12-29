@@ -108,9 +108,9 @@ __END__
 
 =head1 SYNOPSIS
 
-  use Text::Find::Variable;
+  use Text::Find::Scalar;
   
-  my $finder = Text::Find::Variable->new();
+  my $finder = Text::Find::Scalar->new();
   my $arrayref = $finder->find($string);
   
   # or
