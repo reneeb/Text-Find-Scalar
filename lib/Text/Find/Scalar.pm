@@ -6,7 +6,7 @@ use 5.006001;
 use strict;
 use warnings;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 sub new {
     my ($class) = @_;
@@ -152,8 +152,6 @@ Scalars that are not covered
 =item * single quoted
 
   '$foo'
-
-=item
 
 =back
 

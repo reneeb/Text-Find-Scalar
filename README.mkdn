@@ -8,13 +8,13 @@ Text::Find::Scalar - Find scalar names in a text.
 
 # VERSION
 
-version 0.09
+version 0.10
 
 # SYNOPSIS
 
-    use Text::Find::Variable;
+    use Text::Find::Scalar;
     
-    my $finder = Text::Find::Variable->new();
+    my $finder = Text::Find::Scalar->new();
     my $arrayref = $finder->find($string);
     
     # or
@@ -49,8 +49,6 @@ Scalars that are not covered
 - single quoted
 
         '$foo'
-
--
 
 # EXAMPLE
 
